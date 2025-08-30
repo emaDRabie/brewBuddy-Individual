@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">BrewBuddy</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="menu">Menu</string>
+    <string name="orders">Orders</string>
+    <string name="favorites">Favorites</string>
+    <string name="title">Title</string>
+    <string name="rp_20_000">Rp 20.000</string>
+    <string name="good_day_emad_rabie">Good day, Emad Rabie</string>
+
+    <string name="header_good_day_with_name">Good day, %1$s</string>
+    <string name="header_what_drink">What would you like to drink today?</string>
+    <string name="header_orders">Your orders</string>
+    <string name="header_favorites">Your favorite drinks to lighten up your day</string>
+</resources>

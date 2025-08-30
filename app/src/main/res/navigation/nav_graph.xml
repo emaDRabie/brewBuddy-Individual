@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="emad.space.brewbuddy.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_coffeeDetailBottomSheet"
+            app:destination="@id/coffeeDetailBottomSheet" />
+        <action
+            android:id="@+id/action_homeFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="emad.space.brewbuddy.ui.menu.MenuFragment"
+        android:label="Menu"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_coffeeDetailBottomSheet"
+            app:destination="@id/coffeeDetailBottomSheet" />
+        <action
+            android:id="@+id/action_menuFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="emad.space.brewbuddy.ui.favourites.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favoritesFragment_to_coffeeDetailBottomSheet"
+            app:destination="@id/coffeeDetailBottomSheet" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="emad.space.brewbuddy.ui.orders.OrdersFragment"
+        android:label="Orders"
+        tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_ordersFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+
+
+    <dialog
+        android:id="@+id/coffeeDetailBottomSheet"
+        android:name="emad.space.brewbuddy.ui.detail.CoffeeDetailBottomSheet"
+        android:label="Details"
+        tools:layout="@layout/fragment_coffee_detail" />
+</navigation>
