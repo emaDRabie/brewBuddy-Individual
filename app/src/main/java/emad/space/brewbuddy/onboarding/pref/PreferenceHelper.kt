@@ -15,4 +15,9 @@ object PreferenceHelper {
         val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         return prefs.getString(KEY_USER_NAME, null)
     }
+
+    fun deleteUserName(context: Context) {
+        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        prefs.edit().remove(KEY_USER_NAME).apply()
+    }
 }

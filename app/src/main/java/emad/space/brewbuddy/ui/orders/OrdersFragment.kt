@@ -29,7 +29,6 @@ class OrdersFragment : Fragment() {
         binding.rvOrders.layoutManager = LinearLayoutManager(requireContext())
         binding.rvOrders.adapter = adapter
 
-        // Wire the toggle to the ViewModel
         binding.toggle.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.chipRecently -> vm.setRecent()

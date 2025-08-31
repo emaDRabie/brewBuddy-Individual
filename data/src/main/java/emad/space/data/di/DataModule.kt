@@ -9,16 +9,19 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import emad.space.data.local.dao.CatalogDao
 import emad.space.data.local.dao.FavoritesDao
+import emad.space.data.local.dao.HomeCollectionsDao
 import emad.space.data.local.dao.OrdersDao
 import emad.space.data.local.db.AppDatabase
 import emad.space.data.pricing.PricingRepoImpl
 import emad.space.data.remote.CoffeeApiService
 import emad.space.data.repo.CoffeeRepoImpl
 import emad.space.data.repo.FavoritesRepoImpl
+import emad.space.data.repo.HomeCollectionsRepoImpl
 import emad.space.data.repo.OrdersRepoImpl
 import emad.space.data.prefs.UserPrefsRepoImpl
 import emad.space.domain.repo.CoffeeRepo
 import emad.space.domain.repo.FavoritesRepo
+import emad.space.domain.repo.HomeCollectionsRepo
 import emad.space.domain.repo.OrdersRepo
 import emad.space.domain.repo.PricingRepo
 import emad.space.domain.repo.UserPrefsRepo
@@ -49,23 +52,22 @@ object DataModule {
     fun provideCoffeeApi(retrofit: Retrofit): CoffeeApiService =
         retrofit.create(CoffeeApiService::class.java)
 
-    // Room
     @Provides @Singleton
     fun provideDb(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, "brewbuddy.db")
-            // As we add a new table (version bump), allow destructive migration to simplify
-            .fallbackToDestructiveMigration()
+            .addMigrations(AppDatabase.MIGRATION_2_3)
+            // For development you may prefer:
+            // .fallbackToDestructiveMigration()
             .build()
 
     @Provides fun provideFavoritesDao(db: AppDatabase): FavoritesDao = db.favoritesDao()
     @Provides fun provideOrdersDao(db: AppDatabase): OrdersDao = db.ordersDao()
     @Provides fun provideCatalogDao(db: AppDatabase): CatalogDao = db.catalogDao()
+    @Provides fun provideHomeCollectionsDao(db: AppDatabase): HomeCollectionsDao = db.homeCollectionsDao()
 
     @Provides @Singleton
-    fun provideCoffeeRepo(
-        api: CoffeeApiService,
-        catalogDao: CatalogDao
-    ): CoffeeRepo = CoffeeRepoImpl(api, catalogDao)
+    fun provideCoffeeRepo(api: CoffeeApiService, catalogDao: CatalogDao): CoffeeRepo =
+        CoffeeRepoImpl(api, catalogDao)
 
     @Provides @Singleton
     fun provideFavoritesRepo(dao: FavoritesDao): FavoritesRepo = FavoritesRepoImpl(dao)
@@ -79,4 +81,8 @@ object DataModule {
 
     @Provides @Singleton
     fun providePricingRepo(): PricingRepo = PricingRepoImpl()
+
+    @Provides @Singleton
+    fun provideHomeCollectionsRepo(dao: HomeCollectionsDao): HomeCollectionsRepo =
+        HomeCollectionsRepoImpl(dao)
 }

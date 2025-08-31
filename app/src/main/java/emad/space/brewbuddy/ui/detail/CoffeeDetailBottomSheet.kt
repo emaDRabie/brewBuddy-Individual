@@ -118,7 +118,7 @@ class CoffeeDetailBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun updateTotal() {
-        binding.tvTotal.text = "$${vm.total()}"
+        binding.tvTotal.text = "Rp ${vm.total()}"
     }
 
     override fun onDestroyView() {

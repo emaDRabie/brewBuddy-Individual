@@ -16,8 +16,6 @@
     </style>
 
 
-
-    <!-- Used when you reference @style/ShapeAppearanceOverlay.BrewBuddy -->
     <style name="ShapeAppearanceOverlay.BrewBuddy">
         <item name="cornerSizeTopLeft">24dp</item>
         <item name="cornerSizeTopRight">24dp</item>
@@ -25,7 +23,6 @@
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
 
-    <!-- Optional: if you referenced this in a theme for the BottomSheet -->
     <style name="ShapeAppearanceOverlay.BrewBuddy.BottomSheet">
         <item name="cornerSizeTopLeft">24dp</item>
         <item name="cornerSizeTopRight">24dp</item>
@@ -33,4 +30,23 @@
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
 
+
+    <style name="PopupMenuOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="popupMenuStyle">@style/AppPopupMenu</item>
+
+        <item name="dropDownListViewStyle">@style/AppPopupDropdownList</item>
+
+    </style>
+
+    <!-- Popup menu background and other widget-specific tweaks -->
+    <style name="AppPopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/menu_bg</item>
+    </style>
+
+    <!-- Style for the dropdown ListView that renders menu items -->
+    <style name="AppPopupDropdownList" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:listDivider">@drawable/menu_divider</item>
+        <item name="android:divider">@drawable/menu_divider</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
 </resources>

@@ -5,6 +5,7 @@ import emad.space.data.local.entities.FavoriteEntity
 import emad.space.domain.models.CoffeeItem
 import emad.space.domain.repo.FavoritesRepo
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class FavoritesRepoImpl(
@@ -23,18 +24,16 @@ class FavoritesRepoImpl(
 
     override suspend fun toggleFavorite(item: CoffeeItem): Boolean {
         val id = item.id ?: return false
-        var newValue = false
-        // Simple approach: read current value by collecting first(), or rely on UI state to pass the target
-        // Here we optimistically toggle to 'true'
-        dao.upsert(item.toEntity())
-        newValue = true
-        return newValue
+        val currentlyFav = dao.isFavorite(id).first()
+        val next = !currentlyFav
+        if (next) dao.upsert(item.toEntity()) else dao.deleteById(id)
+        return next
     }
 
     private fun FavoriteEntity.toDomain() = CoffeeItem(
         title = title,
         description = description,
-        ingredients = null, // you can parse JSON if you need it in UI
+        ingredients = null,
         image = image,
         id = id
     )
@@ -44,6 +43,6 @@ class FavoritesRepoImpl(
         title = title.orEmpty(),
         description = description,
         image = image,
-        ingredientsJson = null // add if you want to keep ingredients
+        ingredientsJson = null
     )
 }
