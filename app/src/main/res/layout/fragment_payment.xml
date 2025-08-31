@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soft_beige"
+    tools:context=".ui.payment.PaymentFragment">
+
+    <ImageView
+        android:id="@+id/ic_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_deliver_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Deliver to:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_location"
+        app:layout_constraintStart_toEndOf="@id/ic_location"
+        app:layout_constraintTop_toTopOf="@id/ic_location" />
+
+    <TextView
+        android:id="@+id/tv_no_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter"
+        android:text="No saved address"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/ic_location"
+        app:layout_constraintTop_toBottomOf="@+id/ic_location" />
+
+    <TextView
+        android:id="@+id/edit_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Edit"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_no_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_no_address" />
+
+    <TextView
+        android:id="@+id/tv_your_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Your order:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/ic_location"
+        app:layout_constraintTop_toBottomOf="@+id/tv_no_address" />
+
+    <TextView
+        android:id="@+id/tv_order_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="1x Iced Coffee Sweet Heaven"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_your_order"
+        app:layout_constraintTop_toBottomOf="@+id/tv_your_order" />
+
+    <TextView
+        android:id="@+id/tv_order_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:text="Rp 24.000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_order_item"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_item" />
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/dark_copper"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_item_price" />
+
+    <TextView
+        android:id="@+id/tv_sub_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Subtotal"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+    <TextView
+        android:id="@+id/tv_delivery_fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Delivery fee"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sub_total" />
+
+    <TextView
+        android:id="@+id/tv_packaging_fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Packaging fee"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_delivery_fee" />
+
+    <TextView
+        android:id="@+id/tv_promo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Promo"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_packaging_fee" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="TOTAL"
+        android:textColor="@color/dark_copper"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_promo" />
+
+    <TextView
+        android:id="@+id/tv_sub_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 24.000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/divider1"
+        app:layout_constraintTop_toTopOf="@+id/tv_sub_total" />
+
+    <TextView
+        android:id="@+id/tv_delivery_fee_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 3.000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/divider1"
+        app:layout_constraintTop_toTopOf="@+id/tv_delivery_fee" />
+
+    <TextView
+        android:id="@+id/tv_packaging_fee_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 5.000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/divider1"
+        app:layout_constraintTop_toTopOf="@+id/tv_packaging_fee" />
+
+    <TextView
+        android:id="@+id/tv_promo_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 0"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/divider1"
+        app:layout_constraintTop_toTopOf="@+id/tv_promo" />
+
+    <TextView
+        android:id="@+id/tv_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="Rp 32.000"
+        android:textColor="@color/dark_copper"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/divider1"
+        app:layout_constraintTop_toTopOf="@+id/tv_total" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="120dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/btn_cancel_shape"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_copper"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_price" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_place_order"
+        android:layout_width="200dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/btn_place_order_shape"
+        android:text="Place order"
+        android:textAllCaps="false"
+        android:textColor="@color/soft_beige"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/divider1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_price" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

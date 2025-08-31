@@ -13,8 +13,8 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import emad.space.brewbuddy.R
 import emad.space.brewbuddy.databinding.ActivityMainBinding
-import emad.space.brewbuddy.onboarding.OnBoardingActivity
-import emad.space.brewbuddy.onboarding.pref.PreferenceHelper
+import emad.space.brewbuddy.ui.onboarding.OnBoardingActivity
+import emad.space.brewbuddy.ui.onboarding.pref.PreferenceHelper
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

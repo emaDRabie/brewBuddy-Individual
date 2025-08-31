@@ -1,4 +1,4 @@
-package emad.space.brewbuddy.onboarding
+package emad.space.brewbuddy.ui.onboarding
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

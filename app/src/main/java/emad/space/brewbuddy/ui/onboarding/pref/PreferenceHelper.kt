@@ -1,4 +1,4 @@
-package emad.space.brewbuddy.onboarding.pref
+package emad.space.brewbuddy.ui.onboarding.pref
 
 import android.content.Context
 

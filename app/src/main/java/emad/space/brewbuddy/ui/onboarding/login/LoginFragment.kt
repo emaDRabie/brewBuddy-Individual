@@ -1,4 +1,4 @@
-package emad.space.brewbuddy.onboarding.login
+package emad.space.brewbuddy.ui.onboarding.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import emad.space.brewbuddy.R
 import emad.space.brewbuddy.ui.MainActivity
-import emad.space.brewbuddy.onboarding.pref.PreferenceHelper
+import emad.space.brewbuddy.ui.onboarding.pref.PreferenceHelper
 
 
 class LoginFragment : Fragment() {

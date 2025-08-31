@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="emad.space.brewbuddy.onboarding.splash.SplashFragment"
+        android:name="emad.space.brewbuddy.ui.onboarding.splash.SplashFragment"
         android:label="Splash">
         <action
             android:id="@+id/action_splash_to_enterName"
@@ -15,6 +15,6 @@
 
     <fragment
         android:id="@+id/enterNameFragment"
-        android:name="emad.space.brewbuddy.onboarding.login.LoginFragment"
+        android:name="emad.space.brewbuddy.ui.onboarding.login.LoginFragment"
         android:label="Enter Name" />
 </navigation>

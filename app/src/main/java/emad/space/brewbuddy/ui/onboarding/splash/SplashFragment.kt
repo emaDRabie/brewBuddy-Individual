@@ -1,4 +1,4 @@
-package emad.space.brewbuddy.onboarding.splash
+package emad.space.brewbuddy.ui.onboarding.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import emad.space.brewbuddy.R
-import emad.space.brewbuddy.onboarding.pref.PreferenceHelper
+import emad.space.brewbuddy.ui.onboarding.pref.PreferenceHelper
 import emad.space.brewbuddy.ui.MainActivity
 
 
