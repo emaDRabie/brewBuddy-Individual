@@ -1,5 +1,6 @@
 package emad.space.brewbuddy.onboarding.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import emad.space.brewbuddy.R
+import emad.space.brewbuddy.onboarding.pref.PreferenceHelper
+import emad.space.brewbuddy.ui.MainActivity
 
 
 class SplashFragment : Fragment() {
@@ -21,8 +24,16 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val hasName = PreferenceHelper.getUserName(requireContext()) != null
+
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splash_to_enterName)
+            if (hasName) {
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                requireActivity().finish()
+            } else {
+                findNavController().navigate(R.id.action_splash_to_enterName)
+            }
         }, 2000)
     }
 }

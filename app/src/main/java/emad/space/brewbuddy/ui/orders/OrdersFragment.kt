@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import emad.space.brewbuddy.R
 import emad.space.brewbuddy.databinding.FragmentOrdersBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,6 +28,14 @@ class OrdersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.rvOrders.layoutManager = LinearLayoutManager(requireContext())
         binding.rvOrders.adapter = adapter
+
+        // Wire the toggle to the ViewModel
+        binding.toggle.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.chipRecently -> vm.setRecent()
+                R.id.chipPastOrders -> vm.setPast()
+            }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             vm.state.collectLatest { s ->

@@ -7,9 +7,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import emad.space.data.local.db.AppDatabase
+import emad.space.data.local.dao.CatalogDao
 import emad.space.data.local.dao.FavoritesDao
 import emad.space.data.local.dao.OrdersDao
+import emad.space.data.local.db.AppDatabase
 import emad.space.data.pricing.PricingRepoImpl
 import emad.space.data.remote.CoffeeApiService
 import emad.space.data.repo.CoffeeRepoImpl
@@ -51,14 +52,20 @@ object DataModule {
     // Room
     @Provides @Singleton
     fun provideDb(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, "brewbuddy.db").build()
+        Room.databaseBuilder(context, AppDatabase::class.java, "brewbuddy.db")
+            // As we add a new table (version bump), allow destructive migration to simplify
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides fun provideFavoritesDao(db: AppDatabase): FavoritesDao = db.favoritesDao()
     @Provides fun provideOrdersDao(db: AppDatabase): OrdersDao = db.ordersDao()
+    @Provides fun provideCatalogDao(db: AppDatabase): CatalogDao = db.catalogDao()
 
-    // Repos (domain interfaces -> data implementations)
     @Provides @Singleton
-    fun provideCoffeeRepo(api: CoffeeApiService): CoffeeRepo = CoffeeRepoImpl(api)
+    fun provideCoffeeRepo(
+        api: CoffeeApiService,
+        catalogDao: CatalogDao
+    ): CoffeeRepo = CoffeeRepoImpl(api, catalogDao)
 
     @Provides @Singleton
     fun provideFavoritesRepo(dao: FavoritesDao): FavoritesRepo = FavoritesRepoImpl(dao)
