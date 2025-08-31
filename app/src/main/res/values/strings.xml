@@ -14,4 +14,5 @@
     <string name="header_what_drink">What would you like to drink today?</string>
     <string name="header_orders">Your orders</string>
     <string name="header_favorites">Your favorite drinks to lighten up your day</string>
+    <string name="no_saved_address_fallback">%1$s</string>
 </resources>

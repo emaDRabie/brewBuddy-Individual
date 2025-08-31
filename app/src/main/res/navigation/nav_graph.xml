@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
 
     <fragment
@@ -49,6 +52,9 @@
         <action
             android:id="@+id/action_ordersFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_ordersFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
 
 
@@ -57,4 +63,9 @@
         android:name="emad.space.brewbuddy.ui.detail.CoffeeDetailBottomSheet"
         android:label="Details"
         tools:layout="@layout/fragment_coffee_detail" />
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="emad.space.brewbuddy.ui.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
 </navigation>

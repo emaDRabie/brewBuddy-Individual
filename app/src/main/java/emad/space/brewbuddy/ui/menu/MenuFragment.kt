@@ -8,10 +8,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import emad.space.brewbuddy.R
 import emad.space.brewbuddy.databinding.FragmentMenuBinding
+import emad.space.brewbuddy.ui.payment.PaymentBottomSheet
 import emad.space.brewbuddy.ui.shared.CoffeeAdapter
 import emad.space.domain.models.PricedCoffeeItem
 import kotlinx.coroutines.flow.collectLatest
@@ -26,7 +25,8 @@ class MenuFragment : Fragment() {
     private val adapter by lazy {
         CoffeeAdapter(
             onClick = { vm.onCoffeeClicked(it) },
-            onFav = { showAddToOrderConfirm(it) }
+            // Plus button opens Payment bottom sheet
+            onFav = { openPayment(it) }
         )
     }
 
@@ -59,7 +59,7 @@ class MenuFragment : Fragment() {
         vm.navigateToDetail.observe(viewLifecycleOwner) { event ->
             val nav = event.getContentIfNotHandled() ?: return@observe
             findNavController().navigate(
-                R.id.action_menuFragment_to_coffeeDetailBottomSheet,
+                emad.space.brewbuddy.R.id.action_menuFragment_to_coffeeDetailBottomSheet,
                 nav.toBundle()
             )
         }
@@ -67,13 +67,20 @@ class MenuFragment : Fragment() {
         vm.loadHot()
     }
 
-    private fun showAddToOrderConfirm(item: PricedCoffeeItem) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Add to orders")
-            .setMessage("Add ${item.item.title.orEmpty()} to your orders?")
-            .setPositiveButton("Add") { _, _ -> vm.onAddToOrder(item) }
-            .setNegativeButton("Cancel", null)
-            .show()
+    private fun openPayment(item: PricedCoffeeItem, qty: Int = 1) {
+        val sheet = PaymentBottomSheet().apply {
+            arguments = Bundle().apply {
+                putString("orderTitle", item.item.title.orEmpty())
+                putInt("orderQty", qty)
+                putString("orderPrice", item.price.toPlainString())
+                // Pass details for placing an order
+                putInt("coffeeId", item.item.id ?: 0)
+                putString("orderCategory", item.category.name)
+                putString("orderImage", item.item.image)
+                putString("orderDescription", item.item.description)
+            }
+        }
+        sheet.show(parentFragmentManager, "PaymentBottomSheet")
     }
 
     override fun onDestroyView() {

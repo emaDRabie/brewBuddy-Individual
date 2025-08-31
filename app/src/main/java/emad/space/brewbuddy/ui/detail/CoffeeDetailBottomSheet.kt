@@ -18,6 +18,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import emad.space.brewbuddy.R
 import emad.space.brewbuddy.databinding.FragmentCoffeeDetailBinding
+import emad.space.brewbuddy.ui.payment.PaymentBottomSheet
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -72,7 +73,7 @@ class CoffeeDetailBottomSheet : BottomSheetDialogFragment() {
 
         binding.tvTitle.text = vm.title
         binding.tvPrice.text = "Rp ${vm.price}"
-        // Dynamic description
+
         val desc = vm.description.orEmpty()
         binding.tvDetails.text = desc
         binding.tvDetails.visibility = if (desc.isBlank()) View.GONE else View.VISIBLE
@@ -91,22 +92,26 @@ class CoffeeDetailBottomSheet : BottomSheetDialogFragment() {
             updateTotal()
         }
 
-        // Confirmation before ordering
+        // Buy now -> open PaymentBottomSheet with full context for placing order
         binding.btnBuyNow.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Place order")
-                .setMessage("Add ${vm.title} x${vm.quantity} to your orders?")
-                .setPositiveButton("Confirm") { _, _ ->
-                    vm.placeOrder()
-                    dismiss()
+            val sheet = PaymentBottomSheet().apply {
+                arguments = Bundle().apply {
+                    putString("orderTitle", vm.title)
+                    putInt("orderQty", vm.quantity)
+                    putString("orderPrice", vm.price.toPlainString())
+                    putInt("coffeeId", vm.coffeeId)
+                    putString("orderCategory", vm.category.name)
+                    putString("orderImage", vm.image)
+                    putString("orderDescription", vm.description)
                 }
-                .setNegativeButton("Cancel", null)
-                .show()
+            }
+            sheet.show(parentFragmentManager, "PaymentBottomSheet")
+            dismiss()
         }
 
         binding.btnExit.setOnClickListener { dismiss() }
 
-        // Favorite toggle reflects state via isSelected
+        // Favorite toggle reflects state via isSelected, plus optional "Saved" dialog
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.isFavorite.collect { fav ->
@@ -114,7 +119,19 @@ class CoffeeDetailBottomSheet : BottomSheetDialogFragment() {
                 }
             }
         }
-        binding.btnFavorite.setOnClickListener { vm.toggleFavorite() }
+        binding.btnFavorite.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val before = vm.isFavorite.value
+                vm.toggleFavorite()
+                val after = vm.isFavorite.value
+                if (!before && after) {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Saved to favorites")
+                        .setPositiveButton("Done", null)
+                        .show()
+                }
+            }
+        }
     }
 
     private fun updateTotal() {
